@@ -65,16 +65,20 @@
     <script type="module">
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc, getFirestore, doc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 
         // Firebase 구성 정보 설정
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-            // 개인 firebase 이용
+            apiKey: "AIzaSyDVNg9S9Wfb5A5A-Lxjs_JXSjT4MdAey8c",
+            authDomain: "sparta-27fcb.firebaseapp.com",
+            projectId: "sparta-27fcb",
+            storageBucket: "sparta-27fcb.firebasestorage.app",
+            messagingSenderId: "572292667368",
+            appId: "1:572292667368:web:22fcc27db0fa8526bd365d",
+            measurementId: "G-VJTVCHR7TZ"
         };
 
 
@@ -85,6 +89,10 @@
         // 맴버추가 토글( 보이게 안보이게 )
         $("#postingbtn").click(async function () {
             $('#postingbox').toggle();
+        })
+
+        $("#delete").click(async function () {
+            $('#delbox').toggle();
         })
 
         // 카드 추가하기 누르면 DB에 전송
@@ -129,6 +137,22 @@
                 </div>`;
             $('#card').append(temp_html);
         });
+
+        // 맴버 삭제 버튼 
+        $("#delbtn").click(async function () {
+            let delname = $('#delname').val();
+            let docs = await getDocs(collection(db, "member"));
+            docs.forEach(a => {
+                let row = a.data();
+                let name = row['name'];
+
+                if (delname === name) {
+                    deleteDoc(doc(db, "member", a.id));
+                }
+
+            });
+            alert('삭제되었습니다!')
+        })
     </script>
 
 </head>
@@ -141,6 +165,7 @@
         <p> 곽현민, <span style="color:blue; font-weight:bold;">김도환</span>, 김두하, 박진, 이형수. 한승수 </p>
         <div class="btn">
             <button id="postingbtn">맴버 추가하기</button>
+            <button id="delete">맴버 삭제하기</button>
         </div>
     </div>
 
@@ -171,10 +196,20 @@
         </div>
     </div>
 
+    <div class="mypostingbox" id="delbox">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="delname" placeholder="이름">
+            <label for="floatingInput">이름</label>
+        </div>
+        <div class="mybtn">
+            <button id="delbtn" type="button" class="btn btn-dark">삭제하기</button>
+        </div>
+    </div>
+
     <!-- 기본 카드 -->
     <div class="mycards">
         <div id="card" class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col"><a href="">
+            <div class="col"><a href="Hyunmin.html">
                     <div class="card h-100">
                         <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top"
                             alt="...">
@@ -194,45 +229,43 @@
                     </div>
                 </a>
             </div>
-
-            <div class="col">
-                <div class="card h-100"><a href="">
+            <div class="col"><a href="">
+                    <div class="card h-100">
                         <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top"
                             alt="...">
                         <div class="card-body">
                             <h5 class="card-title">김두하</h5>
                         </div>
-                </div>
+                    </div>
                 </a>
             </div>
-            <div class="col">
-                <div class="card h-100"><a href="parkjin.html">
+            <div class="col"><a href="parkjin.html">
+                    <div class="card h-100">
                         <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top"
                             alt="...">
                         <div class="card-body">
                             <h5 class="card-title">박진</h5>
                         </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col"><a href=""></a>
+                <div class="card h-100">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">이형수</h5>
+                    </div>
                 </div>
                 </a>
             </div>
-            <div class="col">
-                <div class="card h-100"><a href="">
-                        <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">이형수</h5>
-                        </div>
-                </div>
-                </a>
-            </div>
-            <div class="col">
-                <div class="card h-100"><a href="">
+            <div class="col"><a href="">
+                    <div class="card h-100">
                         <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top"
                             alt="...">
                         <div class="card-body">
                             <h5 class="card-title">한승수</h5>
                         </div>
-                </div>
+                    </div>
                 </a>
             </div>
 
