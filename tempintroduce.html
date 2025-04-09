@@ -77,13 +77,12 @@
       background-position: center;
     }
 
-
     .txt-about dt {
       display: inline-block;
       margin-bottom: 17px;
       width: 110px;
       font-size: 24px;
-      color: #6a75ca;
+      color: #1d2126;
     }
     .txt-about {
       margin-top: 55px;
@@ -101,12 +100,91 @@
       border-radius: 9px;
     }
 
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 60px;
+      background-color: #c5e3ff;
+      color: transparent;
+      font-size: 18px;
+      z-index: 10;
+
+    }
+    .nav-list {
+      display: flex;
+      justify-content: right;
+    }
+    .list-link {
+      margin-left: 70px;
+      color: black;
+    }
+    .list-link:hover {
+      color: black;
+      border-bottom: 2px solid black;
+    }
+    .btn-code {
+      padding: 8px 23px;
+      border-radius: 20px;
+      background-color: black;
+      color: white;
+    }
+    .btn-code:hover {
+      background-color: white;
+      border: solid 2px black;
+      color: black;
+      transition: 0.2s ease-out;
+    }
+    .bar-bg {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+    }
+    .bar-ing {
+      position: absolute;
+      height: 5px;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+    }
+    .img-icon {
+      margin-top: 70px;
+      width: 240px;
+      color:transparent;
+    }
+    .link-sns{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
   </style>
 
 </head>
 <body>
+<header id="header">
+  <nav>
+    <ul class="nav-list">
+      <li onclick="changeSection(0)"><a href="#about" class="list-link">About</a></li>
+      <li onclick="changeSection(1)"><a href="#tmi" class="list-link">Tmi</a></li>
+      <li onclick="changeSection(2)"><a href="#contact" class="list-link">Contact</a></li>
+      <li>
+        <a href="https://github.com/KimDohwan24/sparta_14" class="list-link btn-code">code</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="bar-bg">
+    <span class="bar-ing" style="width: 25%;"></span>
+  </div>
+</header>
+
 <div class="container">
-  <div class="section">
+  <div class="section" id="about">
     <div class="about_box">
       <div class="about_title">
         개발자 등록증
@@ -133,22 +211,40 @@
     </div>
   </div>
 
-  <div class="section"></div>
+  <div class="section" id ="tmi"></div>
 
-  <div class="section">
+  <div class="section" id="contact">
     <div class="about_box">
       <div class ="about_title">
         Contact
+      </div>
+      <div class="link-sns">
+        <ul>
+          <a href="https://github.com/ParkJin0814"><img class="img-icon" src="img/icon-github.png"/></a>
+        </ul>
+        <ul>
+          <a href="https://github.com/ParkJin0814"><img class="img-icon" src="img/icon-github.png"/></a>
+        </ul>
+        <ul>
+          <a href="https://github.com/ParkJin0814"><img class="img-icon" src="img/icon-github.png"/></a>
+        </ul>
       </div>
     </div>
   </div>
 </div>
 <script>
+  // 마우스휠 애니메이션 변수
   const container = document.querySelector('.container');
   const sections = document.querySelectorAll('.section');
   let currentSection = 0;
   let isAnimating = false;
+  // 스크롤바 변수
+  let scrollTop = 0;
+  let bar;
 
+  window.onload = function () {
+    bar = document.getElementsByClassName("bar-ing")[0];
+  };
 
   function goSection(sectionIndex) {
     sectionIndex = Math.max(0, Math.min(sectionIndex, sections.length - 1));
@@ -161,22 +257,31 @@
     currentSection = sectionIndex;
     container.style.transform = `translateY(-${currentSection * 100}vh)`;
 
+    let per = 100 * ((currentSection +1) /sections.length);
+    bar.style.width = per + "%";
+
     setTimeout(()=> isAnimating = false, 500);
+  }
+
+  function changeSection(sectionIndex){
+    currentSection = sectionIndex;
+    let per = 100 * ((sectionIndex +1) /sections.length);
+
+    bar.style.width = per + "%";
   }
 
   document.addEventListener('wheel', (e) =>{
     if(isAnimating) return;
 
+
     if(e.deltaY > 0){
-      console.log("스크롤다운");
+      //휠다운
       goSection(currentSection + 1);
     } else {
-      console.log("스크롤업");
+      //휠업
       goSection(currentSection - 1);
     }
   })
-
 </script>
-
 </body>
 </html>
