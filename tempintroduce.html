@@ -6,19 +6,33 @@
   <title>OOO의 자기소개</title>
   <style>
     body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
+      height: 300vh;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .section {
+      width: 100vw;
+      height: 100vh;
+
+      display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
-      background-color: #6a75ca;
+
+
       background-image: url('https://coolenjoy.net/data/editor/2203/b6d6ac28e1a05fa6c43fadae6d3bff3ba5c8e1d4.jpg');
       background-size: cover;
       background-position: center;
-
     }
 
-    .about {
+
+    .about_box {
       background-color: bisque ;
 
       display: flex;
@@ -87,54 +101,82 @@
       border-radius: 9px;
     }
 
-    .free_about {
-      background-color: bisque ;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-
-      padding: 20px;
-      border-radius: 10px;
-
-      width: 1000px;
-      height: 500px;
-
-      margin-top: 50px;
-      border: 5px solid black;
-    }
-
   </style>
+
 </head>
 <body>
-<div class="about">
-  <div class="about_title">
-    개발자 등록증
+<div class="container">
+  <div class="section">
+    <div class="about_box">
+      <div class="about_title">
+        개발자 등록증
+      </div>
+      <div class="about_introduce">
+        <div class="post"></div>
+        <dl class="txt-about">
+          <div>
+            <dt>이름</dt>
+            <dd> O O</dd>
+          </div>
+          <div>
+            <dt>생년월일</dt>
+            <dd>97.08.14</dd>
+          </div>
+          <div>
+            <dt>자기소개</dt>
+            <div class="introduce">
+              <p>자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개</p>
+            </div>
+          </div>
+        </dl>
+      </div>
+    </div>
   </div>
-  <div class="about_introduce">
-    <div class="post"></div>
-    <dl class="txt-about">
-      <div>
-        <dt>이름</dt>
-        <dd> O O</dd>
+
+  <div class="section"></div>
+
+  <div class="section">
+    <div class="about_box">
+      <div class ="about_title">
+        Contact
       </div>
-      <div>
-        <dt>생년월일</dt>
-        <dd>97.08.14</dd>
-      </div>
-      <div>
-        <dt>자기소개</dt>
-        <div class="introduce">
-          <p>자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개</p>
-        </div>
-      </div>
-    </dl>
+    </div>
   </div>
 </div>
+<script>
+  const container = document.querySelector('.container');
+  const sections = document.querySelectorAll('.section');
+  let currentSection = 0;
+  let isAnimating = false;
 
-<div class="free_about">
 
-</div>>
+  function goSection(sectionIndex) {
+    sectionIndex = Math.max(0, Math.min(sectionIndex, sections.length - 1));
+
+    if (isAnimating || currentSection === sectionIndex) {
+      return;
+    }
+
+    isAnimating = true;
+    currentSection = sectionIndex;
+    container.style.transform = `translateY(-${currentSection * 100}vh)`;
+
+    setTimeout(()=> isAnimating = false, 500);
+  }
+
+  document.addEventListener('wheel', (e) =>{
+    if(isAnimating) return;
+
+    if(e.deltaY > 0){
+      console.log("스크롤다운");
+      goSection(currentSection + 1);
+    } else {
+      console.log("스크롤업");
+      goSection(currentSection - 1);
+    }
+  })
+
+</script>
+
 </body>
 </html>
