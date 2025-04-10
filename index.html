@@ -34,8 +34,10 @@
     <h1>14조, 잘해보조</h1>
     <!-- 팀 소개 추가 필요 -->
     <h3>백엔드 개발 공부를 열심히 하는 사람들의 모임</h3>
-    <p> 팀장 : 김도환<span style="color: transparent;">, 공간채, 우기, 공간채, 우기공</span> </p>
-    <p> 팀원 : 곽현민, 김두하, 박진, 이형준, 한승수</p>
+    <div>
+        <p> 팀장 : 김도환 </p>
+        <p> 팀원 : 곽현민, 김두하, 박진, 이형준, 한승수</p>
+    </div>
     <div class="btn">
         <button id="postingbtn">맴버 추가하기</button>
         <button id="delete">맴버 삭제하기</button>
@@ -47,11 +49,11 @@
     <div class="mypostingbox" id="postingbox">
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="image" placeholder="사진">
-            <label for="floatingInput">사진</label>
+            <label for="image">사진</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="name" placeholder="이름">
-            <label for="floatingInput">이름</label>
+            <label for="name">이름</label>
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">성별</label>
@@ -63,7 +65,7 @@
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="comment" placeholder="간단한 자기소개">
-            <label for="floatingInput">간단한 자기소개</label>
+            <label for="comment">간단한 자기소개</label>
         </div>
         <div class="mybtn">
             <button id="addbtn" type="button" class="btn btn-dark">추가하기</button>
@@ -73,7 +75,7 @@
     <div class="mypostingbox" id="delbox">
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="delname" placeholder="이름">
-            <label for="floatingInput">이름</label>
+            <label for="delname">이름</label>
         </div>
         <div class="mybtn">
             <button id="delbtn" type="button" class="btn btn-dark">삭제하기</button>
@@ -132,7 +134,7 @@
                 </div>
                 </a>
             </div>
-            <div class="col"><a href="">
+            <div class="col"><a href="hanseungsoo.html">
                 <div class="card h-100">
                     <img src="https://cdn-icons-png.flaticon.com/512/5969/5969711.png" class="card-img-top"
                          alt="...">
