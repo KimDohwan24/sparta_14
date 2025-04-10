@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Gugi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Gugi&family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle&family=Gaegu&family=Gugi&family=Noto+Sans+KR:wght@100..900&family=Orbit&family=Single+Day&display=swap');
+
+.mytitle {
+    /* 배경, 글씨체 수정 필요*/
+    height: 300px;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url('https://cdn.edujin.co.kr/news/photo/202312/44466_87289_1541.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.mytitle>h1 {
+    font-family: "Gugi", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.mytitle>h3 {
+    font-family: "Cute Font", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.mytitle>p {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+
+.mycards {
+    width: 1200px;
+    margin: 0px auto 0px auto;
+
+}
+
+.background {
+    background-image: url('data:image/jpeg;base64,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');
+    background-position: center;
+    background-size: cover;
+}
+
+.card-img-top {
+    width: 350px;
+    height: 400px;
+    margin: 0px auto 0px auto;
+
+}
+
+.card-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+}
+
+.card-body {
+    background-color: azure;
+}
+
+
+.mypostingbox {
+    width: 500px;
+    margin: 0px auto auto auto;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
