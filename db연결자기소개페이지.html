@@ -128,21 +128,21 @@
 
     const docsSnap = await getDocs(collection(db, "intro"));
 
-  if (!docsSnap.empty) {
-    const doc = docsSnap.docs[0];
-    const row = doc.data();
+    if (!docsSnap.empty) {
+      const doc = docsSnap.docs[0];
+      const row = doc.data();
 
-    const name = row['name'];
-    const date = row['date'];
-    const introduce = row['introduce'];
-
-    // 순수 JS 방식 (jQuery를 안 쓰는 경우)
-    document.getElementById("name").innerText = name;
-    document.getElementById("date").innerText = date;
-    document.getElementById("introduce").innerText = introduce;
-  } else {
-    alert('자기소개 정보가 없습니다.');
-  }
+      const name = row['name'];
+      const date = row['date'];
+      const introduce = row['introduce'];
+      
+      // 순수 JS 방식 (jQuery를 안 쓰는 경우)
+      document.getElementById("name").innerText = name;
+      document.getElementById("date").innerText = date;
+      document.getElementById("introduce").innerText = introduce;
+    } else {
+      alert('자기소개 정보가 없습니다.');
+    }
   </script>
 </head>
 

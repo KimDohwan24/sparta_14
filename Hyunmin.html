@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>현민이의 자기소개</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 300vh;
+      transition: transform 0.5s ease-in-out;
+
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    .section {
+      width: 100vw;
+      height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      background-image: url('https://coolenjoy.net/data/editor/2203/b6d6ac28e1a05fa6c43fadae6d3bff3ba5c8e1d4.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+
+    .about_box {
+      background-color: bisque;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+
+      padding: 20px;
+      border-radius: 10px;
+
+      width: 1000px;
+      height: 500px;
+
+      margin-top: 50px;
+
+      border: 5px solid black;
+    }
+
+    .about_title {
+      margin-top: 20px;
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .about_introduce {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 사진 스타일 */
+    .post {
+      width: 350px;
+      height: 350px;
+      border-radius: 9px;
+      margin-right: 100px;
+
+      background-image: url('https://github.com/Hyunmin-Kwak-hub/spartagit/blob/main/%EB%82%B4%EC%82%AC%EC%A7%84.jpg?raw=true');
+      /* 배경 이미지 */
+      background-size: cover;
+      background-position: top;
+    }
+
+    .txt-about dt {
+      display: inline-block;
+      margin-bottom: 17px;
+      width: 110px;
+      font-size: 24px;
+      color: #1d2126;
+    }
+
+    .txt-about {
+      margin-top: 55px;
+    }
+
+    .txt-about dd {
+      display: inline-block;
+      font-size: 30px;
+    }
+
+    .introduce {
+      margin: 20px auto 0 auto;
+      background-color: white;
+      width: 400px;
+      padding: 20px;
+      border: solid black;
+      border-radius: 9px;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 60px;
+      background-color: #c5e3ff;
+      color: transparent;
+      font-size: 18px;
+      z-index: 10;
+
+    }
+
+    .nav-list {
+      display: flex;
+      justify-content: right;
+    }
+
+    .list-link {
+      margin-left: 70px;
+      color: black;
+    }
+
+    .list-link:hover {
+      color: black;
+      border-bottom: 2px solid black;
+    }
+
+    .btn-code {
+      padding: 8px 23px;
+      border-radius: 20px;
+      background-color: black;
+      color: white;
+    }
+
+    .btn-code:hover {
+      background-color: white;
+      border: solid 2px black;
+      color: black;
+      transition: 0.2s ease-out;
+    }
+
+    .bar-bg {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+    }
+
+    .bar-ing {
+      position: absolute;
+      height: 5px;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+    }
+
+    .img-icon {
+      margin-top: 70px;
+      width: 240px;
+      color: transparent;
+    }
+
+    .link-sns {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tmi_content {
+      margin-top: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 700px;
+      font-size: 22px;
+      line-height: 1.8;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .tmi_list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tmi_list li::before {
+      content: '💬 ';
+    }
+  </style>
+  <script type="module">
+    // Firebase SDK 라이브러리 가져오기
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      // 자신의 Firebase 정보를 추가해주세요.
+      apiKey: "AIzaSyC8lFQnpXxeJ78qqV6GcR6-AMGmmguJXhI",
+      authDomain: "sparta-d4c05.firebaseapp.com",
+      projectId: "sparta-d4c05",
+      storageBucket: "sparta-d4c05.firebasestorage.app",
+      messagingSenderId: "378314488525",
+      appId: "1:378314488525:web:388628b2460d4821098784",
+      measurementId: "G-2314GXSSXN"
+    };
+
+    // Firebase 인스턴스 초기화
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const docsSnap = await getDocs(collection(db, "intro"));
+
+    if (!docsSnap.empty) {
+      const doc = docsSnap.docs[0];
+      const row = doc.data();
+
+      const name = row['name'];
+      const date = row['date'];
+      const introduce = row['introduce'];
+
+      // 순수 JS 방식 (jQuery를 안 쓰는 경우)
+      document.getElementById("name").innerText = name;
+      document.getElementById("date").innerText = date;
+      document.getElementById("introduce").innerText = introduce;
+    } else {
+      alert('자기소개 정보가 없습니다.');
+    }
+
+    $("#naver_email").click(function () {
+      alert("khmin052@naver.com");
+    });
+  </script>
+
+</head>
+
+<body>
+  <header id="header">
+    <nav>
+      <ul class="nav-list">
+        <li onclick="changeSection(0)"><a href="#about" class="list-link">About</a></li>
+        <li onclick="changeSection(1)"><a href="#tmi" class="list-link">Tmi</a></li>
+        <li onclick="changeSection(2)"><a href="#contact" class="list-link">Contact</a></li>
+        <li>
+          <a href="https://github.com/KimDohwan24/sparta_14" class="list-link btn-code">code</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="bar-bg">
+      <span class="bar-ing" style="width: 25%;"></span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="section" id="about">
+      <div class="about_box">
+        <div class="about_title">
+          개발자 등록증
+        </div>
+        <div class="about_introduce">
+          <div class="post"></div>
+          <dl class="txt-about">
+            <div>
+              <dt>이름</dt>
+              <dd><span id="name"> O O</span></dd>
+            </div>
+            <div>
+              <dt>생년월일</dt>
+              <dd><span id="date"></span></dd>
+            </div>
+            <div>
+              <dt>자기소개</dt>
+              <div class="introduce">
+                <p id="introduce"></p>
+              </div>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="tmi">
+      <div class="about_box">
+        <div class="about_title">
+          TMI
+        </div>
+        <div class="tmi_content">
+          <ul class="tmi_list">
+            <li>📌 노는걸 좋아해요!!</li>
+            <li>📌 여행 좋아해요!! (유럽 쵝오👍)</li>
+            <li>📌 스포츠 좋아해요!! (축구, 농구, 야구 등등)</li>
+            <li>📌 음악 좋아해요!!</li>
+            <li>📌 돈 많이 벌고 싶어요!!(코스피, 나스닥 제발...🙏🙏)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="contact">
+      <div class="about_box">
+        <div class="about_title">
+          Contact
+        </div>
+        <div class="link-sns">
+          <ul>
+            <a href="https://github.com/Hyunmin-Kwak-hub"><img class="img-icon"
+                src="https://i.namu.wiki/i/fHZ5gT6oZbMPZ5DmaRl-w42i41HvviDiypaTE4ninfooNNrbKKzi5VFWFWyOvrqXdiVd7UZBpg1R-btzVLR0NA.svg" /></a>
+          </ul>
+          <ul>
+            <a href="javascript:void(0)" id="naver_email"><img class="img-icon"
+                src="https://i.namu.wiki/i/V-p4Rf5aF_N8wpaCXOvc5Qi5snQ8SOvnmznQr6Eodxkxr_IC_IfTbXt0esEje4nb2kfEdTSDTqbVsOdQRpbi75MqAmHyhJGaeWsb2XsRGfOe4R5qSyLDKEKvN0JYalPzp7yxXHusY03z3PbQAxXOsw.svg" /></a>
+          </ul>
+          <ul>
+            <a href="https://www.instagram.com/hyunmin___kwak/"><img class="img-icon"
+                src="https://i.namu.wiki/i/T4wKqS_HKGFI4XsnM3H4PDIG4md0G5lf_Xw13ZuEJbwBgTmEuSYCt4HG8SwBHTwON4-mZ6N7v-3P0UfsWZyojYIwMhsgQFfRRZg9fMTOGN7TR2oBPgFWC8GWS4iwFUSQAqq6ganoId488ZwI66zM-A.svg" /></a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 마우스휠 애니메이션 변수
+    const container = document.querySelector('.container');
+    const sections = document.querySelectorAll('.section');
+    let currentSection = 0;
+    let isAnimating = false;
+    // 스크롤바 변수
+    let scrollTop = 0;
+    let bar;
+
+    window.onload = function () {
+      history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+
+      bar = document.getElementsByClassName("bar-ing")[0];
+    };
+
+    function goSection(sectionIndex) {
+      sectionIndex = Math.max(0, Math.min(sectionIndex, sections.length - 1));
+
+      if (isAnimating || currentSection === sectionIndex) {
+        return;
+      }
+
+      isAnimating = true;
+      currentSection = sectionIndex;
+      container.style.transform = `translateY(-${currentSection * 100}vh)`;
+
+      let per = 100 * ((currentSection + 1) / sections.length);
+      bar.style.width = per + "%";
+
+      setTimeout(() => isAnimating = false, 500);
+    }
+
+    function changeSection(sectionIndex) {
+      currentSection = sectionIndex;
+      let per = 100 * ((sectionIndex + 1) / sections.length);
+
+      bar.style.width = per + "%";
+    }
+
+    document.addEventListener('wheel', (e) => {
+      if (isAnimating) return;
+
+
+      if (e.deltaY > 0) {
+        //휠다운
+        goSection(currentSection + 1);
+      } else {
+        //휠업
+        goSection(currentSection - 1);
+      }
+    })
+  </script>
+</body>
+
+</html>

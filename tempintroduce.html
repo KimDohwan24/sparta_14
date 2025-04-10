@@ -243,6 +243,9 @@
   let bar;
 
   window.onload = function () {
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     bar = document.getElementsByClassName("bar-ing")[0];
   };
 
@@ -272,7 +275,6 @@
 
   document.addEventListener('wheel', (e) =>{
     if(isAnimating) return;
-
 
     if(e.deltaY > 0){
       //휠다운
